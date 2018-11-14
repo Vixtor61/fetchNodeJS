@@ -55,7 +55,7 @@ let app = {
                     });
                     document.querySelectorAll(".edit").forEach(element => {
                         element.addEventListener('click', function (evnt) {
-                            event.preventDefault();
+                            evnt.preventDefault();
                             let id = element.getAttribute("data-id");
                             fetch('/materia/' + id)
                                 .then(res => res.json())
@@ -77,7 +77,11 @@ let app = {
 
         form.addEventListener('submit', function (event) {
             event.preventDefault();
-            if (form.action == '/materia') {
+            console.log(form.action);
+            console.log(new URLSearchParams(new FormData(form)));
+            if (form.action == (document.URL + 'materia')) {
+                console.log("hoasd");
+                
                 fetch(form.action, {
                         method: 'POST',
                         body: new URLSearchParams(new FormData(form))
